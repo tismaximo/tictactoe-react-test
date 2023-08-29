@@ -67,8 +67,7 @@ function App() {
             {
               board.map((el, index) => {
                 function handleClick() {
-                  console.log(count)
-                  if (!board[index] && !winner) {
+                    if (!board[index] && !winner) {
                     const newBoard = [... board]
                     newBoard[index] = turn 
                     setBoard(newBoard)
