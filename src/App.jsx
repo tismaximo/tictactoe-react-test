@@ -22,7 +22,7 @@ const combos = [
 function App() {
   const [count, setCount] = useState(() => {
     const storageCount = window.localStorage.getItem("count")
-    return storageCount ? storageCount : 0
+    return storageCount ? Number(storageCount) : 0
   })
   const [board, setBoard] = useState(() => {  
     const storageBoard = window.localStorage.getItem("board")
@@ -67,11 +67,11 @@ function App() {
             {
               board.map((el, index) => {
                 function handleClick() {
+                  console.log(count)
                   if (!board[index] && !winner) {
                     const newBoard = [... board]
                     newBoard[index] = turn 
                     setBoard(newBoard)
-                    
                     setCount(count + 1)
                   }
                 }  
