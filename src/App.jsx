@@ -20,8 +20,17 @@ const combos = [
 
 
 function App() {
-  const [count, setCount] = useState(0)
-  const [board, setBoard] = useState(Array(9).fill(null));
+  const [count, setCount] = useState(() => {
+    const storageCount = window.localStorage.getItem("count")
+    return storageCount ? storageCount : 0
+  })
+  const [board, setBoard] = useState(() => {  
+    const storageBoard = window.localStorage.getItem("board")
+    return storageBoard ? JSON.parse(storageBoard) : Array(9).fill(null)
+  });
+  window.localStorage.setItem("board", JSON.stringify(board))
+  window.localStorage.setItem("count", count)
+
   const [winner, setWinner] = useState(undefined);
   const turn = count % 2 == 0 ? "×" : "o"
 
@@ -48,7 +57,7 @@ function App() {
   }
 
   return (
-    <body>
+    <section className="tictactoe">
       <main>
         <h1>TA TE TI
         </h1>
@@ -75,7 +84,7 @@ function App() {
           {determineTurn()} 
         </section>
       </main>
-    </body>
+    </section>
   )
 }
 
